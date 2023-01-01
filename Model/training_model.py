@@ -22,19 +22,19 @@ def get_distances(seq: list) -> dict:
     greater than 3 Å.
     """
 
-    base_comb = {"AA": [], "AU": [], "AC": [], "AG": [], "UU": [], "UC": [], "UG": [], "CC": [], "CG": [], "GG": []}
+    base_comb = {"AA": [], "AU": [], "AC": [], "AG": [], "UU": [], "UC": [], "UG": [], "CC": [], "CG": [], "GG": []}           
     
     for i, u in enumerate(seq):
         for j, v in enumerate(seq[i:]):
 
-            if int(v[5]) - int(u[5]) > 3:
+            if u[4] == v[4] and int(v[5]) - int(u[5]) > 3:
                 dist = get_interatomic_distance(float(u[6]), float(u[7]), float(u[8]), float(v[6]), float(v[7]), float(v[8]))
                 if dist <= 20:
                     comb = u[3] + v[3]
                     if comb in base_comb:
                         base_comb[comb].append(dist)
                     elif comb[::-1] in base_comb:
-                        base_comb[comb[::-1]].append(dist)       
+                        base_comb[comb[::-1]].append(dist)
 
     return base_comb
 
@@ -55,18 +55,18 @@ def get_freq_matrix(dir_path: str) ->list:
         pdb = []
 
         f = os.path.join(dir_path, filename)
-        # Checking if it is a valid file:
         if os.path.isfile(f) and filename.endswith(".pdb"):
             with open(f, "r") as pdbfile:
-                for line in pdbfile:
-                    if line[:4] == "ATOM":       
-                        splitted_line = [line[:6], line[6:11], line[12:16], line[17:20], line[21:22], line[22:26], line[30:38], line[38:46], line[46:54]]
-                        col= [l.strip() for l in splitted_line]
-                        pdb.append(col)
+                    for line in pdbfile:
+                        if line[:4] == "ATOM":       
+                            splitted_line = [line[:6], line[6:11], line[12:16], line[17:20], line[21:22], line[22:26], line[30:38], line[38:46], line[46:54]]
+                            col= [l.strip() for l in splitted_line]
+                            pdb.append(col)
 
-                if not pdb:
-                    raise AttributeError("PDB file could not be imported..\nCheck file format!")
-            
+                    if not pdb:
+                        raise AttributeError("PDB file could not be imported..\nCheck file format!")
+
+                
             # Only C3' atoms
             onlyc3 = [l for l in pdb if l[2] == "C3\'"]
             counts = get_distances(onlyc3)
