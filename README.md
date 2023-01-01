@@ -28,7 +28,7 @@ $ pip install -r requirements.txt
 
 The default test sequence is Adenosylcobalamin riboswitch (PDB: [DOI 10.2210/pdb4GXY/pdb](https://10.2210/pdb4GXY/pdb)). The PDB file can be found in the `Test` directory. To get the free Gibb's energy according to the model using all default parameters and resulting files, run the `rnascore.py` script in a terminal without any additional arguments.
 ```bash
-$ python rnascore.py
+$ python3 rnascore.py
 ```
 
 ---
