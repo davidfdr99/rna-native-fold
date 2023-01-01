@@ -7,24 +7,46 @@ This is computed by interpolating interatomic distances over a given dataset of 
 The project was developed as coursework for the *Structural Bioinformatics of RNA* course of the Master 2 GENIOMHE of *Université Paris Saclay - Université d'Evry Val d'Essonne* under the supervision of Prof. Guillaume Postic @guipostic.
 
 ---
-## Usage 
+# Installation 
 
 To get the source code, clone this repository:
 ```bash
 $ git clone https://github.com/davidfdr99/rna-native-fold.git
 ```
-
- `script3.py` can be run in a terminal. It takes as argument the path of a PDB file with the sample RNA sequence:
+It is recommended to initialise a new virtual environment (e.g. using conda) and then installing all the dependencies:
 
 ```bash
-$ python script3.py FilesPDB/4gxy.pdb
+$ conda create -n [ENV-NAME]
 ```
-The default sequence is Adenosylcobalamin riboswitch (PDB: [DOI 10.2210/pdb4GXY/pdb](https://10.2210/pdb4GXY/pdb)).
+```bash
+$ pip install -r requirements.txt
+```
+---
+# Usage
 
+## Fast Start
+
+The default test sequence is Adenosylcobalamin riboswitch (PDB: [DOI 10.2210/pdb4GXY/pdb](https://10.2210/pdb4GXY/pdb)). The PDB file can be found in the `Test` directory. To get the free Gibb's energy according to the model using all default parameters and resulting files, run the `rnascore.py` script in a terminal without any additional arguments.
+```bash
+$ python rnascore.py
+```
+
+---
+## Running the scripts
+
+To train the model with a custom library of RNA PDB-files, `training.py` generates a file with one score per distance bin for each combination pair. It takes as single terminal argument the path of the directory containing all the PDB files. Default is `./FilesPDB`.
+```bash
+$ python3 training.py ./FilesPDB
+```
+
+`plotting.py` creates corresponding plots. It takes as single argument the directory where the plots are to be saved. Default is `./InteractionProfiles`.
+```bash
+$ python3 plotting.py ./InteractionProfiles
+```
 ---
 ## Model training
 
-The folder `ModelTraining` contains the scripts with all functions to compute the estimated Gibb's free energy. 
+The folder `Model` contains the scripts with all functions to compute the estimated Gibb's free energy. 
 
 ### Constraints
 
@@ -53,12 +75,9 @@ The score for each residue pair is computed as followed:
 
 $$ u_{i,j}(r) = { -log \left( f _{i,j} ^{OBS}(r) \over f_{i,j} ^{REF}(r) \right) } $$
 
-For each combination pair, `script1.py` generates a file with one score per distance bin. `script2.py` creates corresponding plots. 
-
 ---
-## Interaction Profiles
+## Options
 
-The `InteractionProfiles` folder contains the estimated Pseudo-Energy profiles for each base pair combination. The maximum score is set to 10. 
 
 ---
 ## License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
