@@ -4,7 +4,7 @@ This programme calculates the native fold for a given RNA chain, being the one w
 
 This is computed by interpolating interatomic distances over a given dataset of distance distributions trained from experimentally determined (thus known) 3D structures.
 
-The project was developed as coursework for the *Structural Bioinformatics of RNA* course of the Master 2 GENIOMHE of *Université Paris Saclay - Université d'Evry Val d'Essonne* under the supervision of Prof. Guillaume Postic @guipostic.
+The project was developed as coursework for the *Structural Bioinformatics of RNA* course of the Master 2 GENIOMHE of *Université Paris Saclay - Université d'Evry Val d'Essonne* under the supervision of Prof. Guillaume Postic [@guipostic](https://github.com/guipostic).
 
 ---
 # Installation 
@@ -17,8 +17,6 @@ It is recommended to initialise a new virtual environment (e.g. using conda) and
 
 ```bash
 $ conda create -n [ENV-NAME]
-```
-```bash
 $ pip install -r requirements.txt
 ```
 ---
@@ -94,7 +92,22 @@ y is the interpolated value $^1$.
 ---
 ## Options
 
+For the three scripts, a help option is available by calling --help, e.g. 
 
+```bash
+$ python3 rnascore.py --help
+
+usage: rnascore.py [-h] [test_rna] [training] [output]
+
+positional arguments:
+  test_rna    Please parse a valid path to the PDB file of the RNA sequence to be tested!
+  training    Please parse a valid path to the directory containing pseudoenergy profile files computed by the \`training.py\` script!
+  output      You can choose an output directory where the result will be stored. Please parse a vaild path. If the folder does not exist yet, the directory will be
+              created.
+
+optional arguments:
+  -h, --help  show this help message and exit
+```
 ---
 ## References
 
