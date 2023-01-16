@@ -32,3 +32,4 @@ Ankh.NoLoad
 __pycache__/
 PdB_File/
 /Model/attempt/
+/Model/.DS_Store
