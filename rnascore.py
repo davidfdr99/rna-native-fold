@@ -1,7 +1,5 @@
 import os
-import math
 import argparse
-from datetime import datetime
 
 from Model.get_sequence import get_sequence
 from Model.training_model import get_distances
@@ -42,7 +40,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('test_rna', type=str, nargs='?', default=RNA_TEST, help='Please parse a valid path to the PDB file of the RNA sequence to be tested!')
     parser.add_argument('training', type=str, nargs='?',default=TRAINING_DIR, help='Please parse a valid path to the directory containing pseudoenergy profile files computed by the \`training.py\` script!')
-    parser.add_argument('output', type=str, nargs='?', default=OUTPUT_DIR, help="You can choose a output directory where the result will be stored. Please parse a vaild path. If the folder does not exist yet, the directory will be created.")
+    parser.add_argument('output', type=str, nargs='?', default=OUTPUT_DIR, help="You can choose an output directory where the result will be stored. Please parse a vaild path. If the folder does not exist yet, the directory will be created.")
     args=parser.parse_args()
 
     main(test=args.test_rna, training=args.training, output=args.output)

@@ -43,6 +43,13 @@ $ python3 training.py ./FilesPDB
 ```bash
 $ python3 plotting.py ./InteractionProfiles
 ```
+
+`rnascore.py` is the script used to score a single PDB file. It takes as arguments the path to the PDB file to be tested (test), the path to the training directory containing the 10 files of pseudoenergy profiles (training) as well as a path to an output directory (output).
+
+```bash
+$ python3 rnascore.py ./Test/4gxy.pdb ./Pseudoenergy ./Output
+```
+
 ---
 ## Model training
 
@@ -75,9 +82,23 @@ The score for each residue pair is computed as followed:
 
 $$ u_{i,j}(r) = { -log \left( f _{i,j} ^{OBS}(r) \over f_{i,j} ^{REF}(r) \right) } $$
 
+### Linear Interpolation
+
+The final score of the Gibb's free energy for a given RNA is computed by linearly interpolating the pair-wise distances of the priorly computed Pseudoenergy profiles. Therefore, the following formula is applied for each distance and the result appended to the total energy:
+
+$$ y = y_1 + { (x - x_1)(y_2 - y_1) \over x_2-x_1 } $$
+
+Where x is the coordinate to perform interpolation and
+y is the interpolated value $^1$.
+
 ---
 ## Options
 
+
+---
+## References
+
+$^1$ Linear Interpolation Formula: https://www.geeksforgeeks.org/linear-interpolation-formula/ 
 
 ---
 ## License [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
