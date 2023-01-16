@@ -3,7 +3,7 @@ import math
 import argparse
 from datetime import datetime
 
-from Model.get_sequence import Sequence
+from Model.get_sequence import get_sequence
 from Model.training_model import get_distances
 from Model.testing_model import to_output_dir, write_results_file, uniquify, linear_interpolation
 
@@ -18,12 +18,10 @@ def main(test, training, output):
     """
 
     # Import the PDB-file
-    sample = Sequence(test)
-    sample.pdb_import()
-    sample.only_c3()
+    sample = get_sequence(test)
 
     # Create distances dictionary for the sample
-    dist_sample = get_distances(sample.seq)
+    dist_sample = get_distances(sample)
 
     # Compute Gibb's free energy
     gibbs_energy = linear_interpolation(sample_distances=dist_sample, training_dir=training)
